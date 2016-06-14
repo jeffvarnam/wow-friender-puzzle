@@ -34,14 +34,16 @@
 
 		<script>
 		var auditTrail = [];
-		var TOGGLE_STATE_ON = "ON";
-		var TOGGLE_STATE_OFF = "OFF";
-		var TOGGLE_STATE_ON_CLASSES = "btn btn-success btn-lg";
-		var TOGGLE_STATE_OFF_CLASSES = "btn btn-primary-outline btn-lg";
+		var TOGGLE_STATE_ON = "btn btn-success btn-lg";
+		var TOGGLE_STATE_OFF = "btn btn-primary-outline btn-lg";
 
 		function initialize() {
-			setElementBackground("btn1", TOGGLE_STATE_ON);
+			toggleColor("btn1");
+			toggleColor("btn3");
+			toggleColor("btn5");
+			toggleColor("btn7");
 		}
+
 		function log(num) {
 			auditTrail.push(num);
 			var ele = document.getElementById("auditTrail");
@@ -73,9 +75,9 @@
 		}
 
 		function toggleColor(element) {
-			var currentColor = getElementBackground(element);
+			var currentState = getElementBackground(element);
 
-			if (currentColor != TOGGLE_STATE_ON) {
+			if (currentState != TOGGLE_STATE_ON) {
 				setElementBackground(element, TOGGLE_STATE_ON);
 			} else {
 				setElementBackground(element, TOGGLE_STATE_OFF);
@@ -83,19 +85,11 @@
 		}
 
 		function getElementBackground(element) {
-			if (document.getElementById(element).className == TOGGLE_STATE_ON_CLASSES) {
-				return TOGGLE_STATE_ON;
-			} else {
-				return TOGGLE_STATE_OFF;
-			}
+			return document.getElementById(element).className;
 		}
 
-		function setElementBackground(element, color) {
-			if (color == TOGGLE_STATE_ON) {
-				document.getElementById(element).className = TOGGLE_STATE_ON_CLASSES;
-			} else {
-				document.getElementById(element).className = TOGGLE_STATE_OFF_CLASSES;
-			}
+		function setElementBackground(element, classes) {
+			document.getElementById(element).className = classes;
 		}
 
 		initialize();
