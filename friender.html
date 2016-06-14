@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<title>Gnomeregan 8-Button Puzzle</title>
+		<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Friender Finder</div>
+				<div class="panel-body">
+					<div class="btn-group" role="group">
+						<button id="btn1" type="button" class="btn btn-default" onClick="toggle(1)">1</button>
+						<button id="btn2" type="button" class="btn btn-default" onClick="toggle(2)">2</button>
+						<button id="btn3" type="button" class="btn btn-default" onClick="toggle(3)">3</button>
+						<button id="btn4" type="button" class="btn btn-default" onClick="toggle(4)">4</button>
+						<button id="btn5" type="button" class="btn btn-default" onClick="toggle(5)">5</button>
+						<button id="btn6" type="button" class="btn btn-default" onClick="toggle(6)">6</button>
+						<button id="btn7" type="button" class="btn btn-default" onClick="toggle(7)">7</button>
+						<button id="btn8" type="button" class="btn btn-default" onClick="toggle(8)">8</button>
+					</div>
+					<div id="auditTrail" />
+				</div>
+			</div>
+		</div>
+
+		<script>
+		var auditTrail = [];
+
+		function initialize() {
+			setElementBackground("btn1", "red");
+		}
+		function log(num) {
+			auditTrail.push(num);
+			var ele = document.getElementById("auditTrail");
+			ele.innerHtml += "<span>You selected: " + num + "</span>";
+			ele.innerHtml += "<br/>";
+		}
+
+		function toggle(num) {
+			log(num);
+
+			buttons = [];
+
+			if (num == 1) {
+				buttons.push(1, 2);
+			} else if (num == 8) {
+				buttons.push(7, 8);
+			} else {
+				buttons.push(num - 1, num, num + 1);
+			}
+
+			for (i = 0; i < buttons.length; i++) {
+				var buttonName = buildButtonName(buttons[i]);
+				toggleColor(buttonName);
+			}
+		}
+
+		function buildButtonName(number) {
+			return "btn" + number;
+		}
+
+		function toggleColor(element) {
+			var currentColor = getElementBackground(element);
+
+			if (currentColor != "red") {
+				setElementBackground(element, "red");
+			} else {
+				setElementBackground(element, "black");
+			}
+		}
+
+		function getElementBackground(element) {
+			if (document.getElementById(element).className == "btn btn-success") {
+				return "red";
+			} else {
+				return "black";
+			}
+		}
+
+		function setElementBackground(element, color) {
+			if (color == "red") {
+				document.getElementById(element).className = "btn btn-success";
+			} else {
+				document.getElementById(element).className = "btn btn-default";
+			}
+		}
+
+		initialize();
+		</script>
+	</body>
+</html>
