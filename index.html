@@ -36,6 +36,8 @@
 		var auditTrail = [];
 		var TOGGLE_STATE_ON = "ON";
 		var TOGGLE_STATE_OFF = "OFF";
+		var TOGGLE_STATE_ON_CLASSES = "btn btn-success btn-lg";
+		var TOGGLE_STATE_OFF_CLASSES = "btn btn-primary-outline btn-lg";
 
 		function initialize() {
 			setElementBackground("btn1", TOGGLE_STATE_ON);
@@ -81,7 +83,7 @@
 		}
 
 		function getElementBackground(element) {
-			if (document.getElementById(element).className == "btn btn-success") {
+			if (document.getElementById(element).className == TOGGLE_STATE_ON_CLASSES) {
 				return TOGGLE_STATE_ON;
 			} else {
 				return TOGGLE_STATE_OFF;
@@ -90,9 +92,9 @@
 
 		function setElementBackground(element, color) {
 			if (color == TOGGLE_STATE_ON) {
-				document.getElementById(element).className = "btn btn-success";
+				document.getElementById(element).className = TOGGLE_STATE_ON_CLASSES;
 			} else {
-				document.getElementById(element).className = "btn btn-primary-outline";
+				document.getElementById(element).className = TOGGLE_STATE_OFF_CLASSES;
 			}
 		}
 
