@@ -3,6 +3,8 @@
 		<title>Gnomeregan 8-Button Puzzle</title>
 		<script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
@@ -27,72 +29,13 @@
 						<button id="btn7" type="button" class="btn btn-primary-outline btn-lg" onClick="toggle(7)">7</button>
 						<button id="btn8" type="button" class="btn btn-primary-outline btn-lg" onClick="toggle(8)">8</button>
 					</div>
-					<div id="auditTrail" />
+					<div>
+						<p id="auditTrail"></p>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<script>
-		var auditTrail = [];
-		var TOGGLE_STATE_ON = "btn btn-success btn-lg";
-		var TOGGLE_STATE_OFF = "btn btn-primary-outline btn-lg";
-
-		function initialize() {
-			toggleColor("btn1");
-			toggleColor("btn3");
-			toggleColor("btn5");
-			toggleColor("btn7");
-		}
-
-		function log(num) {
-			auditTrail.push(num);
-			var ele = document.getElementById("auditTrail");
-			ele.innerHtml += "<span>You selected: " + num + "</span>";
-			ele.innerHtml += "<br/>";
-		}
-
-		function toggle(num) {
-			log(num);
-
-			buttons = [];
-
-			if (num == 1) {
-				buttons.push(1, 2);
-			} else if (num == 8) {
-				buttons.push(7, 8);
-			} else {
-				buttons.push(num - 1, num, num + 1);
-			}
-
-			for (i = 0; i < buttons.length; i++) {
-				var buttonName = buildButtonName(buttons[i]);
-				toggleColor(buttonName);
-			}
-		}
-
-		function buildButtonName(number) {
-			return "btn" + number;
-		}
-
-		function toggleColor(element) {
-			var currentState = getElementBackground(element);
-
-			if (currentState != TOGGLE_STATE_ON) {
-				setElementBackground(element, TOGGLE_STATE_ON);
-			} else {
-				setElementBackground(element, TOGGLE_STATE_OFF);
-			}
-		}
-
-		function getElementBackground(element) {
-			return document.getElementById(element).className;
-		}
-
-		function setElementBackground(element, classes) {
-			document.getElementById(element).className = classes;
-		}
-
-		initialize();
-		</script>
+		<script src="main.js"></script>
 	</body>
 </html>
